@@ -6,11 +6,11 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
+import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
+function SEO({ meta }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -19,56 +19,56 @@ function SEO({ description, lang, meta, title }) {
             title
             description
             author
+            keywords
+            ogUrl
+            ogType
+            image
+            lang
           }
         }
       }
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
+  const metaDescription = site.siteMetadata.description
+  const metaTitle = site.siteMetadata.title
+  const keywords = site.siteMetadata.keywords
+  const metaType = site.siteMetadata.ogType
+  const metaUrl = site.siteMetadata.ogUrl
+  const metaImage = site.siteMetadata.image
+  const lang = site.siteMetadata.lang || "en"
   const defaultTitle = site.siteMetadata?.title
+
+  console.log(metaTitle)
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
+      title={metaTitle}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
       meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata?.author || ``,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
+        { name: `description`, content: metaDescription },
+        { property: `og:title`, content: metaTitle },
+        { property: `og:description`, content: metaDescription },
+        { property: `og:type`, content: metaType },
+        { property: `og:url`, content: metaUrl },
+        { property: "og:image", content: metaImage },
+        { property: `twitter:title`, content: metaTitle },
+        { property: "twitter:description", content: metaDescription },
+        { name: "robots", content: "index, follow" },
+        { rel: "canonical", href: "https://www.ankitious.dev/" },
+      ]
+        .concat(
+          keywords.length > 0
+            ? {
+                name: `keywords`,
+                content: keywords.join(`, `),
+              }
+            : []
+        )
+        .concat(meta)}
     />
   )
 }
@@ -76,14 +76,15 @@ function SEO({ description, lang, meta, title }) {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
-  description: ``,
+  keywords: [],
 }
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
+  meta: PropTypes.array,
+  keywords: PropTypes.arrayOf(PropTypes.string),
+  title: PropTypes.string,
 }
 
 export default SEO
