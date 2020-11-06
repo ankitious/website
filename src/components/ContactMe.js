@@ -21,8 +21,7 @@ CONTACT_DETAILS.push([
   "https://twitter.com/ankitious",
   <FaTwitter />,
   "Twitter",
-]) // TWITTER_URL
-// CONTACT_DETAILS.push(['https://dhilipkmr.surge.sh',         <FaGlobe/>,       'Website']);            // WEB_URL
+])
 
 const ContactMe = ({ theme }) => {
   return (

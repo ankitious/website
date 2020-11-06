@@ -2,8 +2,7 @@ import React from "react"
 import FadeIn from "./FadeIn"
 import profilePic from "../assets/profilePic3.png"
 
-const LINKEDIN_URL = "https://www.linkedin.com/in/dhilipkmr"
-const GI_LINKEDIN_URL = "https://www.linkedin.com/company/goibibo/"
+const LINKEDIN_URL = "https://www.linkedin.com/in/ankitious"
 
 const Avatar = () => {
   return (
