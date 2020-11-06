@@ -8,7 +8,7 @@ import ThemeSelector from "./theme-selector"
 
 const LayoutHeader = ({ children }) => {
   const [showHeader, setShowHeader] = useState(false)
-  const [theme, setTheme] = useState(window.__theme)
+  const [theme, setTheme] = useState(   typeof window !== "undefined" && window.__theme)
   const currPath = globalHistory.location.pathname
   return (
     <div>
