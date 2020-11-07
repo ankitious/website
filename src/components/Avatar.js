@@ -1,6 +1,6 @@
 import React from "react"
 import FadeIn from "./FadeIn"
-import profilePic from "../assets/profilePic3.png"
+import profilePic from "../assets/profile.jpeg"
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/ankitious"
 
