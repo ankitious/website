@@ -13,7 +13,7 @@ const Avatar = () => {
       >
         <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
           <img
-            alt="profileImg"
+            alt="Panchal"
             className="posAbs avatarImg "
             width="400"
             height="400"
